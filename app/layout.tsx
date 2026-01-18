@@ -1,10 +1,6 @@
 import "./globals.css";
-import Navbar from "@/components/navbar/Navbar";
-
-export const metadata = {
-  title: "Sannidhya Ray | Portfolio",
-  description: "ECE + Physics | ML | Systems",
-};
+import "./app.css";
+import Navbar from "@/components/ui/Navbar";
 
 export default function RootLayout({
   children,
@@ -15,7 +11,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-black text-white antialiased">
         <Navbar />
-        {children}
+        <main className="pt-16">
+          {children}
+        </main>
       </body>
     </html>
   );
