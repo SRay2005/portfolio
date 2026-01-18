@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
-import LiveBackground from "@/components/effects/LiveBackground";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,19 +27,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
-      >
-        {/* Live cosmic background */}
-        <LiveBackground />
-
-        {/* Global navigation */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}>
         <Navbar />
+        <main className="relative">{children}</main>
 
-        {/* Page content */}
-        <main className="relative z-10">
-          {children}
-        </main>
+        {/* Vercel Analytics */}
+        <Analytics />
       </body>
     </html>
   );
