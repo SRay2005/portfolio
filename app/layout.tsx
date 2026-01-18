@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
+import LiveBackground from "@/components/effects/LiveBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sannidhya Ray | Portfolio",
   description:
-    "Portfolio of Sannidhya Ray — ECE + Physics, Machine Learning, Systems, and Space Hardware.",
+    "Portfolio of Sannidhya Ray — ECE + Physics @ BITS Pilani"
 };
 
 export default function RootLayout({
@@ -29,14 +30,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
-        {/* Optional background layer */}
-        {/* <div className="fixed inset-0 -z-10 bg-black" /> */}
+        {/* Live cosmic background */}
+        <LiveBackground />
 
         {/* Global navigation */}
         <Navbar />
 
         {/* Page content */}
-        <main className="relative">
+        <main className="relative z-10">
           {children}
         </main>
       </body>
