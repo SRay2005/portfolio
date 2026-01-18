@@ -10,11 +10,8 @@ export default function Contact() {
         {/* Heading */}
         <div>
           <h1 className="text-4xl md:text-5xl font-bold mb-3">
-            Contact Me
+            CONTACT ME
           </h1>
-          <p className="text-muted-foreground">
-            Feel free to reach out — I’m always open to opportunities and conversations.
-          </p>
         </div>
 
         {/* Contact Cards */}

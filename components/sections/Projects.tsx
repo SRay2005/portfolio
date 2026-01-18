@@ -4,22 +4,22 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
-    title: "Hyperspectral Imaging Payload Study",
+    title: "Imager – AI detector for images",
     description:
-      "Study and evaluation of compact hyperspectral camera systems for CubeSat missions, focusing on spectral resolution, data rates, and feasibility for low-cost space platforms.",
-    tags: ["Hyperspectral", "Remote Sensing", "CubeSat"],
+      "Designed an AI image detection system with a backend to assess likelihood of AI-generated content using multi-signal forensic analysis.",
+    tags: ["CNNs", "Image Forensics", "FastAPI"],
   },
   {
-    title: "Satellite Subsystem Design & Analysis",
+    title: "FormulaT - Tyre survival prediction tool",
     description:
-      "Hands-on work across satellite subsystems including EPS, OBC, TTC, and ADCS, with emphasis on system-level trade-offs and space-grade constraints.",
-    tags: ["Space Systems", "EPS", "OBC", "ADCS"],
+      "Built and trained a predictive model for Formula 1 tyre survival probabilities using historical data and machine learning",
+    tags: ["Machine Learning", "Data Analysis"],
   },
   {
-    title: "Machine Learning for Image Analysis",
+    title: "Dielectric characterization of Liquid Crystals with Terphenyl doping",
     description:
-      "Exploration of machine learning and image processing techniques for classification and analysis of imaging data, with applications in detection and automation.",
-    tags: ["Machine Learning", "Image Processing"],
+      "Conducted experimental analysis of dielectric properties of liquid crystals doped with Terphenyl for enhanced electro-optic applications.",
+    tags: ["Research", "Electronics", "Physics"],
   },
   {
     title: "Engineering & Systems Projects",
@@ -40,7 +40,7 @@ export default function Projects() {
         className="text-center mb-16"
       >
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          Projects
+          PROJECTS
         </h1>
         <p className="text-gray-400 max-w-2xl mx-auto">
           A selection of academic, technical, and exploratory projects across space systems,
