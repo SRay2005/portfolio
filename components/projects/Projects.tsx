@@ -9,7 +9,7 @@ const projects = [
   },
   {
     title: "Wave Solder Monitoring",
-    description: "Real-time industrial monitoring system.",
+    description: "Industrial real-time monitoring system.",
   },
   {
     title: "CubeSat Camera Research",
@@ -33,7 +33,7 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
             viewport={{ once: true }}
-            className="p-6 rounded-2xl border border-white/10 hover:border-white/30 hover:scale-105 transition cursor-pointer bg-white/5"
+            className="p-6 rounded-2xl border border-white/10 hover:border-white/30 hover:scale-105 transition bg-white/5"
           >
             <h3 className="text-xl font-semibold mb-2">
               {project.title}
