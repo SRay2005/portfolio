@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "./app.css";
 import Navbar from "@/components/ui/Navbar";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Sannidhya Ray | Portfolio",
+  description:
+    "Portfolio of Sannidhya Ray — ECE + Physics, Machine Learning, Systems, and Space Hardware.",
+};
 
 export default function RootLayout({
   children,
@@ -9,9 +26,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white antialiased">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
+      >
+        {/* Optional background layer */}
+        {/* <div className="fixed inset-0 -z-10 bg-black" /> */}
+
+        {/* Global navigation */}
         <Navbar />
-        <main className="pt-16">
+
+        {/* Page content */}
+        <main className="relative">
           {children}
         </main>
       </body>
