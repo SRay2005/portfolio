@@ -2,6 +2,16 @@
 
 import { motion } from "framer-motion";
 
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
+};
+
 const projects = [
   {
     title: "Imager – AI detector for images",
@@ -42,6 +52,12 @@ export default function Projects() {
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           PROJECTS
         </h1>
+
+        <motion.div
+                              variants={item}
+                              className="h-1 w-16 mx-auto mb-6 bg-linear-to-r from-white/80 to-white/30 rounded-full"
+                            />
+                            
         <p className="text-gray-400 max-w-2xl mx-auto">
           A selection of academic, technical, and exploratory projects across space systems,
           machine learning, and engineering.

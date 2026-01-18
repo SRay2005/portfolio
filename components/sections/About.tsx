@@ -89,7 +89,7 @@ export default function About() {
             variants={item}
             className="text-3xl md:text-5xl font-bold mb-4"
           >
-            About Me
+            ABOUT ME
           </motion.h2>
 
           <motion.div
@@ -99,11 +99,13 @@ export default function About() {
 
           <motion.p
             variants={item}
-            className="text-white/70 max-w-2xl mx-auto text-base md:text-lg"
-          >
-            I work at the intersection of software, hardware, and intelligence 
-            Building systems that bridge algorithms with the physical world.
+            className="text-white/70 max-w-2xl mx-auto text-base md:text-lg text-center"
+>
+              I work at the intersection of software, hardware, and intelligence
+              <br />
+               Building systems that bridge algorithms with the physical world.
           </motion.p>
+
         </motion.div>
 
         {/* Intro */}

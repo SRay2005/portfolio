@@ -2,6 +2,16 @@
 
 import Link from "next/link";
 import { Mail, Phone, Github, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
+};
 
 export default function Contact() {
   return (
@@ -12,6 +22,12 @@ export default function Contact() {
           <h1 className="text-4xl md:text-5xl font-bold mb-3">
             CONTACT ME
           </h1>
+
+          <motion.div
+                      variants={item}
+                      className="h-1 w-16 mx-auto mb-6 bg-linear-to-r from-white/80 to-white/30 rounded-full"
+                    />
+          
         </div>
 
         {/* Contact Cards */}
