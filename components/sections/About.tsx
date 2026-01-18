@@ -36,9 +36,9 @@ const itemLeft = {
 /* ---------------- Your content ---------------- */
 
 const stats = [
-  { value: "ECE + Physics", label: "Dual Degree @ BITS Pilani" },
-  { value: "ML + Systems", label: "Primary Focus" },
-  { value: "Space Tech", label: "Core Domain" },
+  { value: "B.E ECE", label: "BITS Pilani" },
+  { value: "M.S Physics", label: "BITS Pilani" },
+  { value: "7.32", label: "CGPA" },
   { value: "2028", label: "Graduation Year" },
 ];
 
@@ -46,9 +46,9 @@ const tags = [
   "Machine Learning",
   "Image Processing",
   "Remote Sensing",
-  "Systems Engineering",
+  "Software Development",
+  "Python Development",
   "Space Hardware",
-  "Frontend",
 ];
 
 const highlights = [
@@ -66,7 +66,7 @@ const highlights = [
   },
   {
     title: "Industry Experience",
-    text: "Industry exposure through Siemens internship, focusing on engineering workflows, automation, and real-world systems.",
+    text: "Industry exposure through internships, focusing on engineering workflows, automation, and real-world systems.",
   },
 ];
 
@@ -101,8 +101,8 @@ export default function About() {
             variants={item}
             className="text-white/70 max-w-2xl mx-auto text-base md:text-lg"
           >
-            I work at the intersection of software, hardware, and intelligence —
-            building systems that bridge algorithms with the physical world.
+            I work at the intersection of software, hardware, and intelligence 
+            Building systems that bridge algorithms with the physical world.
           </motion.p>
         </motion.div>
 
@@ -116,8 +116,8 @@ export default function About() {
         >
           <motion.div variants={itemLeft}>
             <Image
-              src="/assets/images/about-placeholder.png"
-              alt="Engineering illustration"
+              src="/assets/SANNIDHYA_RAY.png"
+              alt="Sannidhya Ray"
               width={600}
               height={400}
               className="rounded-xl"
