@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "./Container";
 import clsx from "clsx";
-import { Menu, X } from "lucide-react"; // 🔴 CHANGE: icons for mobile menu
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -14,10 +14,16 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
+/* 🔴 Resume link (external) */
+const resumeLink = {
+  name: "Resume",
+  href: "/resume.pdf",
+};
+
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
-  const [open, setOpen] = React.useState(false); // 🔴 CHANGE: mobile menu state
+  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -44,7 +50,7 @@ export default function Navbar() {
             SR
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* ================= Desktop ================= */}
           <div className="hidden md:flex items-center gap-8 text-sm">
             {navLinks.map((link) => (
               <Link
@@ -60,9 +66,25 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {/* 🔴 Resume boxed button (desktop) */}
+            <a
+              href={resumeLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                px-3 py-1.5 rounded-md
+                border border-white/20
+                text-gray-200
+                hover:border-white/40 hover:text-white
+                transition
+              "
+            >
+              Resume
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* ================= Mobile toggle ================= */}
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden text-white"
@@ -73,7 +95,7 @@ export default function Navbar() {
         </nav>
       </Container>
 
-      {/* Mobile Menu Panel */}
+      {/* ================= Mobile Menu ================= */}
       {open && (
         <div className="md:hidden bg-black/95 backdrop-blur border-t border-white/10">
           <div className="flex flex-col px-6 py-4 gap-4 text-sm">
@@ -81,7 +103,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                onClick={() => setOpen(false)} // 🔴 CHANGE: close on click
+                onClick={() => setOpen(false)}
                 className={clsx(
                   "transition-colors",
                   isActive(link.href)
@@ -92,6 +114,24 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {/* 🔴 Resume boxed button (mobile) */}
+            <a
+              href={resumeLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="
+                mt-2 inline-flex w-fit
+                px-3 py-1.5 rounded-md
+                border border-white/20
+                text-gray-200
+                hover:border-white/40 hover:text-white
+                transition
+              "
+            >
+              Resume
+            </a>
           </div>
         </div>
       )}
