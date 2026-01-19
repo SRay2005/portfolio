@@ -30,7 +30,7 @@ export function Hero() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="mt-6 text-sm md:text-base tracking-wide text-gray-400"
         >
-          • Machine Learning • Software • Electronics • Space & Hardware
+           Machine Learning • Software • Electronics • Space & Hardware
         </motion.p>
 
         {/* Divider */}
