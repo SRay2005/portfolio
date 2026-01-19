@@ -37,6 +37,7 @@ export default function Navbar() {
     >
       <Container>
         <nav className="h-16 flex items-center justify-between">
+          
           {/* Logo */}
           <Link
             href="/"
@@ -61,6 +62,16 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {/* 🔴 ADDED: Resume link (opens resume.pdf) */}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white/40 transition"
+            >
+              Resume
+            </a>
           </div>
         </nav>
       </Container>
