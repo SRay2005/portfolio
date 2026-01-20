@@ -130,7 +130,7 @@ export default function Navbar() {
                 transition
               "
             >
-              Resume
+              Résumé
             </a>
           </div>
         </div>
