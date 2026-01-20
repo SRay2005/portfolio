@@ -16,7 +16,7 @@ const navLinks = [
 
 /* 🔴 Resume link (external) */
 const resumeLink = {
-  name: "Resume",
+  name: "Résumé",
   href: "/resume.pdf",
 };
 
@@ -80,7 +80,7 @@ export default function Navbar() {
                 transition
               "
             >
-              Resume
+              Résumé
             </a>
           </div>
 
