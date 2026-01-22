@@ -127,7 +127,7 @@ export default function About() {
           </motion.div>
 
           <motion.div variants={item} className="space-y-5">
-            <h3 className="text-2xl font-semibold">Who I Am</h3>
+            <h3 className="text-2xl font-semibold">Who Am I?</h3>
             <p className="text-white/70 leading-relaxed">
               I’m a dual-degree undergraduate at BITS Pilani with strong interests
               in machine learning, space systems, and engineering design. I enjoy
