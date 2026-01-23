@@ -62,7 +62,7 @@ const highlights = [
   },
   {
     title: "Space Systems Exposure",
-    text: "Hands-on experience with CubeSat subsystems, hyperspectral imaging, and satellite payload design through Team Anant.",
+    text: "Hands-on experience with CubeSat subsystems, multispectral imaging, and satellite payload design through Team Anant.",
   },
   {
     title: "Industry Experience",
