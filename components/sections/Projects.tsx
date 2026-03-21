@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 
-
 const item = {
   hidden: { opacity: 0, y: 24 },
   show: {
@@ -14,7 +13,7 @@ const item = {
 
 const projects = [
   {
-    title: "TicTacToeTwo - An advanced web-based multiplayer game",
+    title: "TicTacToeTwo - An advanced web-based game",
     description:
       "BUilt a real time multiplayer game with rating system, AI opponents and authorisation.",
     tags: ["Full Stack", "Firebase", "APIs"],
@@ -38,7 +37,6 @@ const projects = [
       "Conducted experimental analysis of dielectric properties of liquid crystals doped with Terphenyl for enhanced electro-optic applications.",
     tags: ["Research", "Electronics", "Physics"],
   },
-  
 ];
 
 export default function Projects() {
@@ -56,10 +54,10 @@ export default function Projects() {
         </h1>
 
         <motion.div
-                              variants={item}
-                              className="h-1 w-16 mx-auto mb-6 bg-linear-to-r from-white/80 to-white/30 rounded-full"
-                            />
-                            
+          variants={item}
+          className="h-1 w-16 mx-auto mb-6 bg-linear-to-r from-white/80 to-white/30 rounded-full"
+        />
+
         <p className="text-gray-400 max-w-2xl mx-auto">
           A selection of academic, technical, and exploratory projects across space systems,
           machine learning, and engineering.
@@ -80,9 +78,22 @@ export default function Projects() {
             <h2 className="text-xl font-semibold mb-3">
               {project.title}
             </h2>
+
             <p className="text-gray-400 text-sm mb-4 leading-relaxed">
               {project.description}
             </p>
+
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mb-4 text-sm text-white underline hover:text-gray-300 transition"
+              >
+                Play Game →
+              </a>
+            )}
+
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
