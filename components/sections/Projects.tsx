@@ -15,7 +15,7 @@ const projects = [
   {
     title: "TicTacToeTwo - An advanced web-based game",
     description:
-      "BUilt a real time multiplayer game with rating system, AI opponents and authorisation.",
+      "Built a real time multiplayer game with rating system, AI opponents and authorisation.",
     tags: ["Full Stack", "Firebase", "APIs"],
     link: "https://tictactoetwo.vercel.app",
   },
@@ -29,7 +29,7 @@ const projects = [
     title: "FormulaT - Tyre survival prediction tool",
     description:
       "Built and trained a predictive model for Formula 1 tyre survival probabilities using historical data and machine learning",
-    tags: ["Machine Learning", "Data Analysis"],
+    tags: ["Machine Learning", "Data Analysis", "Python"],
   },
   {
     title: "Dielectric characterization of Liquid Crystals with Terphenyl doping",
