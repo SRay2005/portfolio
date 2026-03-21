@@ -14,6 +14,13 @@ const item = {
 
 const projects = [
   {
+    title: "TicTacToeTwo - An advanced web-based multiplayer game",
+    description:
+      "BUilt a real time multiplayer game with rating system, AI opponents and authorisation.",
+    tags: ["Full Stack", "Firebase", "APIs"],
+    link: "https://tictactoetwo.vercel.app",
+  },
+  {
     title: "Imager – AI detector for images",
     description:
       "Designed an AI image detection system with a backend to assess likelihood of AI-generated content using multi-signal forensic analysis.",
@@ -31,12 +38,7 @@ const projects = [
       "Conducted experimental analysis of dielectric properties of liquid crystals doped with Terphenyl for enhanced electro-optic applications.",
     tags: ["Research", "Electronics", "Physics"],
   },
-  {
-    title: "Engineering & Systems Projects",
-    description:
-      "Academic and practical projects spanning electronics, signal processing, and systems engineering during coursework and industry exposure.",
-    tags: ["ECE", "Physics", "Systems"],
-  },
+  
 ];
 
 export default function Projects() {
