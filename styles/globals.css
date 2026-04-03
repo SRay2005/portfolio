@@ -7,8 +7,8 @@
 }
 
 @font-face {
-  font-family: "Bebas Neue";
-  src: url("/fonts/BebasNeue-Regular.ttf") format("truetype");
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-Regular.otf") format("opentype");
   font-weight: normal;
 }
 
@@ -23,8 +23,20 @@
 body {
   background: black;
   color: white;
-  font-family: Bebas Neue, Arial, Helvetica, sans-serif;
+  font-family: Orbitron, Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+}
+
+/* ===== PAGE FADE ===== */
+
+.page {
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* ===== NAVBAR ===== */
@@ -46,7 +58,7 @@ body {
 
 /* Force navbar font everywhere */
 .navbar, .navbar * {
-  font-family: Bebas Neue, Arial, Helvetica, sans-serif;
+  font-family: Orbitron, Arial, Helvetica, sans-serif;
   color: white;
 }
 
@@ -116,7 +128,7 @@ body {
   box-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
 }
 
-/* ===== MARVEL INTRO ===== */
+/* ===== INTRO ===== */
 
 .intro {
   position: relative;
@@ -179,6 +191,27 @@ body {
   position: relative;
 }
 
+/* Particles */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* Parallax glow */
+.parallax-bg {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 60%);
+  transition: transform 0.1s linear;
+  z-index: 0;
+}
+
+/* Grid overlay */
 .grid-overlay {
   position: absolute;
   width: 200%;
@@ -187,6 +220,7 @@ body {
                     linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
   background-size: 80px 80px;
   animation: moveGrid 20s linear infinite;
+  z-index: 1;
 }
 
 @keyframes moveGrid {
@@ -195,10 +229,10 @@ body {
 }
 
 .center {
-  position: absolute;
+  position: relative;
+  z-index: 2;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   text-align: center;
 }
 
@@ -221,10 +255,11 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(255,140,0,0.25), black 70%);
-  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, rgba(255,140,0,0.35), black 70%);
+  z-index: 9999; /* VERY IMPORTANT */
+  pointer-events: none;
 }
 
 /* ===== PROJECTS ===== */
@@ -418,47 +453,6 @@ body {
   opacity: 0.85;
 }
 
-.about-sections {
-  max-width: 900px;
-  margin: 90px auto;
-}
-
-.about-sections div {
-  margin-bottom: 45px;
-  border-left: 2px solid rgba(255,255,255,0.2);
-  padding-left: 20px;
-}
-
-.about-sections h3 {
-  margin-bottom: 6px;
-  font-size: 20px;
-}
-
-.about-sections p {
-  opacity: 0.65;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.about-stats {
-  display: flex;
-  justify-content: center;
-  gap: 110px;
-  margin-top: 70px;
-  text-align: center;
-}
-
-.about-stats h2 {
-  font-size: 34px;
-  font-family: Cinzel;
-}
-
-.about-stats p {
-  opacity: 0.6;
-  font-size: 13px;
-  margin-top: 6px;
-}
-
 /* ===== CONTACT TERMINAL ===== */
 
 .contact-page {
@@ -525,33 +519,4 @@ body {
   0% { opacity: 1; }
   50% { opacity: 0; }
   100% { opacity: 1; }
-}
-
-/* Direct links */
-.contact-links {
-  position: absolute;
-  bottom: 40px;
-  right: 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.contact-links h2 {
-  color: white;
-  margin-bottom: 10px;
-  font-family: Bebas Neue;
-  font-size: 18px;
-}
-
-.contact-links a {
-  color: #ffb347;
-  text-decoration: none;
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-.contact-links a:hover {
-  text-decoration: underline;
-  opacity: 1;
 }

@@ -1,11 +1,13 @@
 "use client"
 
 import Navbar from "@/components/Navbar"
+import PageWrapper from "@/components/PageWrapper"
 import { useEffect, useRef } from "react"
 
 export default function Home() {
   const bgRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const animationRef = useRef<number | null>(null)
 
   // Parallax
   useEffect(() => {
@@ -30,8 +32,13 @@ export default function Home() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+
+    resizeCanvas()
+    window.addEventListener("resize", resizeCanvas)
 
     type Particle = {
       x: number
@@ -70,24 +77,33 @@ export default function Home() {
         if (p.y < 0 || p.y > canvas.height) p.dy *= -1
       })
 
-      requestAnimationFrame(animate)
+      animationRef.current = requestAnimationFrame(animate)
     }
 
     animate()
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+      window.removeEventListener("resize", resizeCanvas)
+    }
   }, [])
 
   return (
-    <div className="home">
-      <Navbar />
+    <PageWrapper>
+      <div className="home">
+        <Navbar />
 
-      <canvas ref={canvasRef} className="particles"></canvas>
-      <div className="parallax-bg" ref={bgRef}></div>
-      <div className="grid-overlay"></div>
+        <canvas ref={canvasRef} className="particles"></canvas>
+        <div className="parallax-bg" ref={bgRef}></div>
+        <div className="grid-overlay"></div>
 
-      <div className="center">
-        <h1 className="hero">SANNIDHYA RAY</h1>
-        <p className="subtitle">Electronics • Physics • Machine Learning</p>
+        <div className="center">
+          <h1 className="hero">SANNIDHYA RAY</h1>
+          <p className="subtitle">Electronics • Physics • Machine Learning</p>
+        </div>
       </div>
-    </div>
+    </PageWrapper>
   )
 }
