@@ -24,7 +24,7 @@ const projects = [
     status: "MODEL",
   },
   {
-    name: "Liquid Crystal Research",
+    name: "Liquid CrystalS",
     desc: "Dielectric characterization of liquid crystals.",
     tech: "Electronics • Physics • Research",
     status: "RESEARCH",
