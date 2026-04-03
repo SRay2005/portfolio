@@ -13,7 +13,16 @@ export default function MarvelIntro() {
     const tiles = gridRef.current?.querySelectorAll("img")
     if (!tiles) return
 
-    // Keep changing images like Marvel panels
+    // Lock initial states before first paint — prevents FOUC
+    gsap.set(gridRef.current, { scale: 1.5 })
+    gsap.set(textRef.current, {
+      opacity: 0,
+      scale: 1.8,
+      filter: "blur(12px)",
+      xPercent: -50,
+      yPercent: -50,
+    })
+
     const imageInterval = setInterval(() => {
       tiles.forEach((img) => {
         const random = Math.floor(Math.random() * 11) + 1
@@ -23,35 +32,28 @@ export default function MarvelIntro() {
 
     const tl = gsap.timeline()
 
-    // Slow zoom out of grid
     tl.fromTo(
       gridRef.current,
       { scale: 1.5 },
       { scale: 1, duration: 5, ease: "power2.out" }
     )
-
-      // Cinematic text reveal (blur -> sharp)
       .fromTo(
         textRef.current,
         { opacity: 0, scale: 1.8, filter: "blur(12px)" },
         { opacity: 1, scale: 1, filter: "blur(0px)", duration: 3 },
         "-=2"
       )
-
-      // Hold text on screen a bit
-      .to({}, { duration: 1 })
-
-      // Fade everything out
-      .to([gridRef.current, textRef.current], {
-        opacity: 0,
-        duration: 1.5,
-      })
-
-      // Go to home
+      .to({}, { duration: 2.5 })
+      .to([gridRef.current, textRef.current], { opacity: 0, duration: 1.5 })
       .call(() => {
         clearInterval(imageInterval)
         router.push("/home")
       })
+
+    return () => {
+      clearInterval(imageInterval)
+      tl.kill()
+    }
   }, [])
 
   return (
@@ -63,9 +65,7 @@ export default function MarvelIntro() {
           </div>
         ))}
       </div>
-
       <div className="intro-overlay"></div>
-
       <h1 ref={textRef} className="marvel-text">
         SANNIDHYA RAY
       </h1>

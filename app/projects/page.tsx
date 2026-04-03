@@ -9,7 +9,7 @@ const projects = [
     desc: "Real-time multiplayer strategy game with rating system and AI opponents.",
     tech: "Full Stack • Firebase • APIs",
     status: "DEPLOYED",
-    link: "https://github.com/SRay2005",
+    link: "https://tictactoetwo.vercel.app/",
   },
   {
     name: "Imager AI",
@@ -18,7 +18,7 @@ const projects = [
     status: "MODEL",
   },
   {
-    name: "FormulaT",
+    name: "Formula-T",
     desc: "Formula 1 tyre survival prediction using ML models.",
     tech: "Machine Learning • Python • Data Analysis",
     status: "MODEL",
@@ -39,7 +39,6 @@ export default function Projects() {
 
         <h1 className="projects-title">PROJECTS</h1>
         <div className="projects-line"></div>
-        <p className="projects-sub">MODULES LOADED: 04</p>
 
         <div className="apps-container">
           {projects.map((p, i) => (

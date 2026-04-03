@@ -6,8 +6,7 @@ import { useState, useRef, useEffect } from "react"
 
 export default function Contact() {
   const defaultHistory = [
-    "Sannidhya Ray Terminal v1.0",
-    "Type 'help' to see available commands.",
+    "Type commands and press Enter. Try 'help' to see a list of commands.",
     ""
   ]
 
@@ -17,11 +16,11 @@ export default function Contact() {
   const terminalRef = useRef<HTMLDivElement>(null)
 
   const commands: any = {
-    help: "Commands: email, github, linkedin, resume, clear",
-    email: <a href="mailto:sannidhya@example.com">sannidhya@example.com</a>,
+    help: "Commands: email, github, linkedin, CV, clear",
+    email: <a href="mailto:sannidhya.ray2005@gmail.com">sannidhya.ray2005@gmail.com</a>,
     github: <a href="https://github.com/SRay2005" target="_blank">github.com/SRay2005</a>,
-    linkedin: <a href="https://linkedin.com">linkedin.com</a>,
-    resume: <a href="/resume.pdf" target="_blank">Opening resume...</a>,
+    linkedin: <a href="https://linkedin.com/in/sannidhya-ray" target="_blank">linkedin.com/in/sannidhya-ray</a>,
+    CV: <a href="/resume.pdf" target="_blank">Opening CV...</a>,
   }
 
   const handleCommand = (cmd: string) => {
@@ -29,7 +28,6 @@ export default function Contact() {
       setHistory(defaultHistory)
       return
     }
-
     let output = commands[cmd] || "Command not found"
     setHistory((prev: any) => [...prev, `> ${cmd}`, output])
   }
@@ -44,28 +42,45 @@ export default function Contact() {
       <div className="contact-page">
         <Navbar />
 
-        <div
-          className="terminal"
-          ref={terminalRef}
-          onClick={() => inputRef.current?.focus()}
-        >
-          {history.map((line: any, i: number) => (
-            <div key={i} className="terminal-line">{line}</div>
-          ))}
+        <div style={{ width: "900px" }}>
+          <div
+            className="terminal"
+            ref={terminalRef}
+            onClick={() => inputRef.current?.focus()}
+          >
+            {history.map((line: any, i: number) => (
+              <div key={i} className="terminal-line">{line}</div>
+            ))}
+            <div className="terminal-input">
+              <span>&gt;</span>
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleCommand(input.toLowerCase())
+                    setInput("")
+                  }
+                }}
+              />
+            </div>
+          </div>
 
-          <div className="terminal-input">
-            <span>&gt;</span>
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleCommand(input.toLowerCase())
-                  setInput("")
-                }
-              }}
-            />
+          {/* Direct links for people who don't want the terminal */}
+          <div className="contact-links">
+            <a href="mailto:sannidhya.ray2005@gmail.com" className="contact-link">
+              Email
+            </a>
+            <a href="https://github.com/SRay2005" target="_blank" className="contact-link">
+              GitHub
+            </a>
+            <a href="https://linkedin.com/in/sannidhya-ray" target="_blank" className="contact-link">
+              LinkedIn
+            </a>
+            <a href="/resume.pdf" target="_blank" className="contact-link">
+              CV
+            </a>
           </div>
         </div>
       </div>

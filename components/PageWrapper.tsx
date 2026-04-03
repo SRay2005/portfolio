@@ -3,16 +3,19 @@
 import { useEffect, useState } from "react"
 
 export default function PageWrapper({ children }: { children: React.ReactNode }) {
-  const [visible, setVisible] = useState(false)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    // Delay fade-in slightly so portal can close first
-    const t = setTimeout(() => setVisible(true), 200)
+    // Wait 200ms so the portal overlay can close before page fades in
+    const t = setTimeout(() => setReady(true), 200)
     return () => clearTimeout(t)
   }, [])
 
   return (
-    <div className={`page ${visible ? "fade-in" : ""}`}>
+    <div
+      className="page"
+      style={{ animationPlayState: ready ? "running" : "paused" }}
+    >
       {children}
     </div>
   )

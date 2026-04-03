@@ -7,9 +7,14 @@
 }
 
 @font-face {
-  font-family: "Orbitron";
-  src: url("/fonts/Orbitron-Regular.otf") format("opentype");
+  font-family: "Bebas Neue";
+  src: url("/fonts/BebasNeue-Regular.ttf") format("truetype");
   font-weight: normal;
+}
+
+@font-face {
+  font-family: "Uniwars";
+  src: url("/fonts/Uniwars Hv.otf") format("opentype");
 }
 
 /* ===== GLOBAL RESET ===== */
@@ -23,7 +28,7 @@
 body {
   background: black;
   color: white;
-  font-family: Orbitron, Arial, Helvetica, sans-serif;
+  font-family: Bebas Neue, Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
@@ -56,9 +61,8 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Force navbar font everywhere */
 .navbar, .navbar * {
-  font-family: Orbitron, Arial, Helvetica, sans-serif;
+  font-family: Bebas Neue, Arial, Helvetica, sans-serif;
   color: white;
 }
 
@@ -93,25 +97,16 @@ body {
   transition: width 0.3s ease;
 }
 
-.nav-right span:hover {
-  opacity: 1;
-}
+.nav-right span:hover { opacity: 1; }
+.nav-right span:hover::after { width: 100%; }
 
-.nav-right span:hover::after {
-  width: 100%;
-}
-
-/* Active tab */
 .nav-right .active {
   opacity: 1;
   color: #ffb347;
 }
 
-.nav-right .active::after {
-  width: 100%;
-}
+.nav-right .active::after { width: 100%; }
 
-/* Resume button */
 .resume-btn {
   border: 1px solid rgba(255,255,255,0.25);
   padding: 8px 18px;
@@ -130,12 +125,16 @@ body {
 
 /* ===== INTRO ===== */
 
+/* Single definition — fixed, covers everything */
 .intro {
-  position: relative;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
-  overflow: hidden;
+  height: 100vh;
   background: black;
+  z-index: 10000;
+  overflow: hidden;
 }
 
 .marvel-grid {
@@ -165,13 +164,13 @@ body {
   z-index: 3;
 }
 
+/* No transform here — GSAP owns it via xPercent/yPercent */
 .marvel-text {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   font-size: 110px;
-  font-family: Cinzel;
+  font-family: Uniwars;
   letter-spacing: 18px;
   z-index: 5;
   text-align: center;
@@ -180,6 +179,38 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Single definition */
+.intro-fade {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* Must beat .intro at z-index 10000 */
+.skip-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 35px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #e0e0e0;
+  padding: 6px 12px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
+  border-radius: 4px;
+  z-index: 10001;
+}
+
+.skip-btn:hover {
+  opacity: 1;
+  color: #ffffff;
+  border: 1px solid #ffb347;
+  box-shadow: 0 0 8px rgba(255, 180, 70, 0.5);
 }
 
 /* ===== HOME ===== */
@@ -191,7 +222,6 @@ body {
   position: relative;
 }
 
-/* Particles */
 .particles {
   position: fixed;
   top: 0;
@@ -199,7 +229,6 @@ body {
   z-index: 0;
 }
 
-/* Parallax glow */
 .parallax-bg {
   position: absolute;
   width: 120%;
@@ -211,7 +240,6 @@ body {
   z-index: 0;
 }
 
-/* Grid overlay */
 .grid-overlay {
   position: absolute;
   width: 200%;
@@ -257,9 +285,14 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle at center, rgba(255,140,0,0.35), black 70%);
-  z-index: 9999; /* VERY IMPORTANT */
+  background: transparent; /* Three.js scene handles all visuals */
+  z-index: 9999;
   pointer-events: none;
+}
+
+.portal canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* ===== PROJECTS ===== */
@@ -275,7 +308,7 @@ body {
   font-size: 56px;
   margin-top: 110px;
   letter-spacing: 6px;
-  font-family: Cinzel;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .projects-line {
@@ -347,9 +380,7 @@ body {
   margin-top: 6px;
 }
 
-.app-right {
-  text-align: right;
-}
+.app-right { text-align: right; }
 
 .status {
   font-size: 12px;
@@ -358,7 +389,7 @@ body {
 
 .status.deployed { color: #00ff9c; }
 .status.research { color: #4fc3f7; }
-.status.model { color: #ffb347; }
+.status.model    { color: #ffb347; }
 
 .status.clickable {
   cursor: pointer;
@@ -387,7 +418,7 @@ body {
   font-size: 56px;
   margin-top: 120px;
   letter-spacing: 5px;
-  font-family: Cinzel;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .about-line {
@@ -401,7 +432,7 @@ body {
 .about-subtitle {
   text-align: center;
   opacity: 0.65;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.7;
 }
 
@@ -423,9 +454,7 @@ body {
   box-shadow: 0 0 30px rgba(255,255,255,0.15);
 }
 
-.about-bio {
-  max-width: 460px;
-}
+.about-bio { max-width: 460px; }
 
 .about-bio h2 {
   margin-bottom: 12px;
@@ -435,7 +464,7 @@ body {
 .about-bio p {
   opacity: 0.7;
   line-height: 1.7;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .about-tags {
@@ -449,8 +478,65 @@ body {
   border: 1px solid rgba(255,255,255,0.2);
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 14px;
   opacity: 0.85;
+}
+
+
+/* ===== ABOUT HIGHLIGHTS ===== */
+
+.about-highlights {
+  max-width: 900px;
+  margin: 70px auto 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.about-highlight-item h3 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: white;
+}
+
+.about-highlight-item p {
+  font-size: 16px;
+  opacity: 0.7;
+  line-height: 1.7;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* ===== ABOUT STATS ===== */
+
+.about-stats {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 70px;
+  padding: 50px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-value {
+  font-family: 'Arial Black', Gadget, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.stat-label {
+  font-size: 18px;
+  opacity: 0.5;
+  letter-spacing: 2px;
 }
 
 /* ===== CONTACT TERMINAL ===== */
@@ -507,59 +593,43 @@ body {
   text-decoration: underline;
 }
 
-.terminal::-webkit-scrollbar {
-  width: 6px;
-}
-
-.terminal::-webkit-scrollbar-thumb {
-  background: #00ff9c;
-}
+.terminal::-webkit-scrollbar { width: 6px; }
+.terminal::-webkit-scrollbar-thumb { background: #00ff9c; }
 
 @keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
   100% { opacity: 1; }
 }
 
+.contact-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+  justify-content: center;
+}
 
-/* Skip intro button */
-
-.skip-btn {
-  position: absolute;
-  bottom: 30px;
-  right: 35px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255,255,255,0.35);
-  color: #e0e0e0;
-  padding: 6px 12px;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(6px);
+.contact-link {
+  border: 1px solid rgba(0, 255, 150, 0.3);
+  color: #00ff9c;
+  padding: 8px 20px;
   border-radius: 4px;
-  z-index: 10;
+  font-family: monospace;
+  font-size: 13px;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
-.skip-btn:hover {
-  opacity: 1;
-  color: #ffffff;
-  border: 1px solid #ffb347;
-  box-shadow: 0 0 8px rgba(255, 180, 70, 0.5);
+.contact-link:hover {
+  background: rgba(0, 255, 150, 0.1);
+  border-color: rgba(0, 255, 150, 0.7);
+  box-shadow: 0 0 10px rgba(0, 255, 150, 0.3);
 }
-
-.intro-fade {
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
 
 /* ===== MOBILE RESPONSIVE ===== */
 
 @media (max-width: 768px) {
 
-  /* Navbar */
   .navbar {
     padding: 0 20px;
     height: 60px;
@@ -575,7 +645,6 @@ body {
     font-size: 12px;
   }
 
-  /* Intro */
   .marvel-text {
     font-size: 42px;
     letter-spacing: 6px;
@@ -588,7 +657,6 @@ body {
     padding: 5px 10px;
   }
 
-  /* Home */
   .hero {
     font-size: 36px;
     letter-spacing: 4px;
@@ -599,15 +667,12 @@ body {
     letter-spacing: 2px;
   }
 
-  /* Projects */
   .projects-title {
     font-size: 34px;
     margin-top: 90px;
   }
 
-  .apps-container {
-    width: 90%;
-  }
+  .apps-container { width: 90%; }
 
   .app-card {
     flex-direction: column;
@@ -620,7 +685,6 @@ body {
     text-align: left;
   }
 
-  /* About */
   .about-title {
     font-size: 34px;
     margin-top: 90px;
@@ -638,47 +702,20 @@ body {
     max-width: 320px;
   }
 
-  .about-bio {
-    max-width: 100%;
-  }
+  .about-bio { max-width: 100%; }
 
   .about-stats {
     flex-direction: column;
     gap: 30px;
   }
 
-  /* Contact terminal */
   .terminal {
     width: 90%;
     height: 400px;
   }
 
-  .contact-page {
-    padding-top: 90px;
-  }
+  .contact-page { padding-top: 90px; }
 
-  /* General spacing */
   .projects-line,
-  .about-line {
-    margin-bottom: 10px;
-  }
-}
-
-
-
-/* Intro should cover entire screen above everything */
-.intro {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: black;
-  z-index: 10000;
-  overflow: hidden;
-}
-
-.intro-fade {
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  .about-line { margin-bottom: 10px; }
 }

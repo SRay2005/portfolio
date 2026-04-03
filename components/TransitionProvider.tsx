@@ -6,7 +6,7 @@ import PortalTransition from "./PortalTransition"
 
 const TransitionContext = createContext<any>(null)
 
-export function useTransition() {
+export function usePageTransition() {
   return useContext(TransitionContext)
 }
 
@@ -16,14 +16,8 @@ export default function TransitionProvider({ children }: { children: React.React
 
   const navigate = (path: string) => {
     setPortal(true)
-
-    setTimeout(() => {
-      router.push(path)
-    }, 900)
-
-    setTimeout(() => {
-      setPortal(false)
-    }, 1800)
+    setTimeout(() => router.push(path), 900)
+    setTimeout(() => setPortal(false), 1800)
   }
 
   return (
