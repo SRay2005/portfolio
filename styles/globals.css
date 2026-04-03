@@ -56,7 +56,6 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Force navbar font everywhere */
 .navbar, .navbar * {
   font-family: Orbitron, Arial, Helvetica, sans-serif;
   color: white;
@@ -101,7 +100,6 @@ body {
   width: 100%;
 }
 
-/* Active tab */
 .nav-right .active {
   opacity: 1;
   color: #ffb347;
@@ -111,7 +109,6 @@ body {
   width: 100%;
 }
 
-/* Resume button */
 .resume-btn {
   border: 1px solid rgba(255,255,255,0.25);
   padding: 8px 18px;
@@ -130,12 +127,16 @@ body {
 
 /* ===== INTRO ===== */
 
+/* Single consolidated .intro block — fixed covers full screen above everything */
 .intro {
-  position: relative;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
-  overflow: hidden;
+  height: 100vh;
   background: black;
+  z-index: 10000;
+  overflow: hidden;
 }
 
 .marvel-grid {
@@ -169,7 +170,7 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  /* No transform here — GSAP owns this property via xPercent/yPercent */
   font-size: 110px;
   font-family: Cinzel;
   letter-spacing: 18px;
@@ -182,6 +183,38 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+/* Single consolidated .intro-fade block */
+.intro-fade {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* Skip intro button */
+.skip-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 35px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #e0e0e0;
+  padding: 6px 12px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.skip-btn:hover {
+  opacity: 1;
+  color: #ffffff;
+  border: 1px solid #ffb347;
+  box-shadow: 0 0 8px rgba(255, 180, 70, 0.5);
+}
+
 /* ===== HOME ===== */
 
 .home {
@@ -191,7 +224,6 @@ body {
   position: relative;
 }
 
-/* Particles */
 .particles {
   position: fixed;
   top: 0;
@@ -199,7 +231,6 @@ body {
   z-index: 0;
 }
 
-/* Parallax glow */
 .parallax-bg {
   position: absolute;
   width: 120%;
@@ -211,7 +242,6 @@ body {
   z-index: 0;
 }
 
-/* Grid overlay */
 .grid-overlay {
   position: absolute;
   width: 200%;
@@ -258,7 +288,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: radial-gradient(circle at center, rgba(255,140,0,0.35), black 70%);
-  z-index: 9999; /* VERY IMPORTANT */
+  z-index: 9999;
   pointer-events: none;
 }
 
@@ -521,45 +551,10 @@ body {
   100% { opacity: 1; }
 }
 
-
-/* Skip intro button */
-
-.skip-btn {
-  position: absolute;
-  bottom: 30px;
-  right: 35px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255,255,255,0.35);
-  color: #e0e0e0;
-  padding: 6px 12px;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(6px);
-  border-radius: 4px;
-  z-index: 10;
-}
-
-.skip-btn:hover {
-  opacity: 1;
-  color: #ffffff;
-  border: 1px solid #ffb347;
-  box-shadow: 0 0 8px rgba(255, 180, 70, 0.5);
-}
-
-.intro-fade {
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-
 /* ===== MOBILE RESPONSIVE ===== */
 
 @media (max-width: 768px) {
 
-  /* Navbar */
   .navbar {
     padding: 0 20px;
     height: 60px;
@@ -575,7 +570,6 @@ body {
     font-size: 12px;
   }
 
-  /* Intro */
   .marvel-text {
     font-size: 42px;
     letter-spacing: 6px;
@@ -588,7 +582,6 @@ body {
     padding: 5px 10px;
   }
 
-  /* Home */
   .hero {
     font-size: 36px;
     letter-spacing: 4px;
@@ -599,7 +592,6 @@ body {
     letter-spacing: 2px;
   }
 
-  /* Projects */
   .projects-title {
     font-size: 34px;
     margin-top: 90px;
@@ -620,7 +612,6 @@ body {
     text-align: left;
   }
 
-  /* About */
   .about-title {
     font-size: 34px;
     margin-top: 90px;
@@ -647,7 +638,6 @@ body {
     gap: 30px;
   }
 
-  /* Contact terminal */
   .terminal {
     width: 90%;
     height: 400px;
@@ -657,28 +647,8 @@ body {
     padding-top: 90px;
   }
 
-  /* General spacing */
   .projects-line,
   .about-line {
     margin-bottom: 10px;
   }
-}
-
-
-
-/* Intro should cover entire screen above everything */
-.intro {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: black;
-  z-index: 10000;
-  overflow: hidden;
-}
-
-.intro-fade {
-  opacity: 0;
-  transition: opacity 0.6s ease;
 }
