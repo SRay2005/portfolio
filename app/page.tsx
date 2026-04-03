@@ -27,7 +27,7 @@ export default function IntroPage() {
       <MarvelIntro />
 
       <button className="skip-btn" onClick={skipIntro}>
-        ENTER SYSTEM →
+        Skip Intro →
       </button>
     </div>
   )

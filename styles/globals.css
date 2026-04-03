@@ -523,25 +523,30 @@ body {
 
 
 /* Skip intro button */
+
 .skip-btn {
   position: absolute;
-  bottom: 40px;
-  right: 50px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.25);
-  color: white;
-  padding: 10px 18px;
-  font-size: 12px;
-  letter-spacing: 2px;
+  bottom: 30px;
+  right: 35px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #e0e0e0;
+  padding: 6px 12px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
   cursor: pointer;
-  opacity: 0.7;
-  transition: 0.3s;
+  opacity: 0.8;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
+  border-radius: 4px;
+  z-index: 10;
 }
 
 .skip-btn:hover {
   opacity: 1;
+  color: #ffffff;
   border: 1px solid #ffb347;
-  box-shadow: 0 0 12px rgba(255, 180, 70, 0.5);
+  box-shadow: 0 0 8px rgba(255, 180, 70, 0.5);
 }
 
 .intro-fade {
@@ -579,8 +584,8 @@ body {
   .skip-btn {
     bottom: 20px;
     right: 20px;
-    font-size: 11px;
-    padding: 8px 12px;
+    font-size: 10px;
+    padding: 5px 10px;
   }
 
   /* Home */
