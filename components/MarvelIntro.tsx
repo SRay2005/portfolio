@@ -13,10 +13,7 @@ export default function MarvelIntro() {
     const tiles = gridRef.current?.querySelectorAll("img")
     if (!tiles) return
 
-    // Fix Bug 1: Lock initial states before first paint
-    gsap.set(gridRef.current, { scale: 1.5 })
-    gsap.set(textRef.current, { opacity: 0, scale: 1.8, filter: "blur(12px)" })
-
+    // Keep changing images like Marvel panels
     const imageInterval = setInterval(() => {
       tiles.forEach((img) => {
         const random = Math.floor(Math.random() * 11) + 1
@@ -26,11 +23,14 @@ export default function MarvelIntro() {
 
     const tl = gsap.timeline()
 
+    // Slow zoom out of grid
     tl.fromTo(
       gridRef.current,
       { scale: 1.5 },
       { scale: 1, duration: 5, ease: "power2.out" }
     )
+
+      // Cinematic text reveal (blur -> sharp)
       .fromTo(
         textRef.current,
         { opacity: 0, scale: 1.8, filter: "blur(12px)" },
@@ -38,24 +38,20 @@ export default function MarvelIntro() {
         "-=2"
       )
 
-      // Fix Bug 2: Hold long enough for the name to be readable
-      .to({}, { duration: 2.5 })
+      // Hold text on screen a bit
+      .to({}, { duration: 1 })
 
+      // Fade everything out
       .to([gridRef.current, textRef.current], {
         opacity: 0,
         duration: 1.5,
       })
 
+      // Go to home
       .call(() => {
         clearInterval(imageInterval)
         router.push("/home")
       })
-
-    // Cleanup if component unmounts mid-animation
-    return () => {
-      clearInterval(imageInterval)
-      tl.kill()
-    }
   }, [])
 
   return (
