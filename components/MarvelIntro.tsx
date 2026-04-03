@@ -34,7 +34,7 @@ export default function MarvelIntro() {
       .fromTo(
         textRef.current,
         { opacity: 0, scale: 1.8, filter: "blur(12px)" },
-        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 2 },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 3 },
         "-=2"
       )
 

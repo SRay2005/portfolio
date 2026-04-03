@@ -11,7 +11,9 @@ export default function IntroPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setFadeOut(true)
-      setTimeout(() => router.push("/home"), 600)
+      setTimeout(() => {
+        router.push("/home")
+      }, 600)
     }, 5000)
 
     return () => clearTimeout(timer)
@@ -19,7 +21,9 @@ export default function IntroPage() {
 
   const skipIntro = () => {
     setFadeOut(true)
-    setTimeout(() => router.push("/home"), 600)
+    setTimeout(() => {
+      router.push("/home")
+    }, 600)
   }
 
   return (

@@ -663,3 +663,22 @@ body {
     margin-bottom: 10px;
   }
 }
+
+
+
+/* Intro should cover entire screen above everything */
+.intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.intro-fade {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
