@@ -1,9 +1,7 @@
-import Hero from "@/components/sections/Hero";
+"use client"
 
-export default function HomePage() {
-  return (
-    <>
-      <Hero />
-    </>
-  );
+import MarvelIntro from "@/components/MarvelIntro"
+
+export default function Page() {
+  return <MarvelIntro />
 }
