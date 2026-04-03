@@ -67,9 +67,9 @@ body {
 }
 
 .nav-left {
-  font-family: Cinzel;
+  font-family: sans-serif;
   font-size: 22px;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
 }
 
 .nav-right {

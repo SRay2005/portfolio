@@ -16,11 +16,11 @@ export default function Contact() {
   const terminalRef = useRef<HTMLDivElement>(null)
 
   const commands: any = {
-    help: "Commands: email, github, linkedin, CV, clear",
+    help: "Commands: email, github, linkedin, cv, clear",
     email: <a href="mailto:sannidhya.ray2005@gmail.com">sannidhya.ray2005@gmail.com</a>,
     github: <a href="https://github.com/SRay2005" target="_blank">github.com/SRay2005</a>,
     linkedin: <a href="https://linkedin.com/in/sannidhya-ray" target="_blank">linkedin.com/in/sannidhya-ray</a>,
-    CV: <a href="/resume.pdf" target="_blank">Opening CV...</a>,
+    cv: <a href="/resume.pdf" target="_blank">Open CV here</a>,
   }
 
   const handleCommand = (cmd: string) => {
