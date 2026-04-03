@@ -548,3 +548,113 @@ body {
   opacity: 0;
   transition: opacity 0.6s ease;
 }
+
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+
+  /* Navbar */
+  .navbar {
+    padding: 0 20px;
+    height: 60px;
+  }
+
+  .nav-right {
+    gap: 18px;
+    font-size: 12px;
+  }
+
+  .resume-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Intro */
+  .marvel-text {
+    font-size: 42px;
+    letter-spacing: 6px;
+  }
+
+  .skip-btn {
+    bottom: 20px;
+    right: 20px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  /* Home */
+  .hero {
+    font-size: 36px;
+    letter-spacing: 4px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  /* Projects */
+  .projects-title {
+    font-size: 34px;
+    margin-top: 90px;
+  }
+
+  .apps-container {
+    width: 90%;
+  }
+
+  .app-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .app-right {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* About */
+  .about-title {
+    font-size: 34px;
+    margin-top: 90px;
+  }
+
+  .about-top {
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+
+  .about-image {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .about-bio {
+    max-width: 100%;
+  }
+
+  .about-stats {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* Contact terminal */
+  .terminal {
+    width: 90%;
+    height: 400px;
+  }
+
+  .contact-page {
+    padding-top: 90px;
+  }
+
+  /* General spacing */
+  .projects-line,
+  .about-line {
+    margin-bottom: 10px;
+  }
+}
