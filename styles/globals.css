@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: "Uniwars";
-  src: url("/fonts/Uniwars Hv.otf") format("opentype");
+  src: url("/fonts/Uniwars%20Hv.otf") format("opentype");
 }
 
 /* ===== GLOBAL RESET ===== */
@@ -28,7 +28,7 @@
 body {
   background: black;
   color: white;
-  font-family: Bebas Neue, Arial, Helvetica, sans-serif;
+  font-family: "Bebas Neue", Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
@@ -62,7 +62,7 @@ body {
 }
 
 .navbar, .navbar * {
-  font-family: Bebas Neue, Arial, Helvetica, sans-serif;
+  font-family: "Bebas Neue", Arial, Helvetica, sans-serif;
   color: white;
 }
 
@@ -170,7 +170,7 @@ body {
   top: 50%;
   left: 50%;
   font-size: 110px;
-  font-family: Uniwars;
+  font-family: "Uniwars", sans-serif;
   letter-spacing: 18px;
   z-index: 5;
   text-align: center;
@@ -267,7 +267,7 @@ body {
 .hero {
   font-size: 80px;
   letter-spacing: 10px;
-  font-family: Cinzel;
+  font-family: "Cinzel", serif;
 }
 
 .subtitle {
@@ -364,7 +364,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Cinzel;
+  font-family: "Cinzel", serif;
   font-size: 22px;
 }
 
