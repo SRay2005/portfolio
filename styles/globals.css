@@ -28,7 +28,7 @@
 body {
   background: black;
   color: white;
-  font-family: "Bebas Neue", Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
   overflow-x: hidden;
 }
 
@@ -62,12 +62,13 @@ body {
 }
 
 .navbar, .navbar * {
-  font-family: "Bebas Neue", Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
   color: white;
 }
 
 .nav-left {
-  font-family: sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 800;
   font-size: 22px;
   letter-spacing: 2px;
 }
@@ -170,7 +171,8 @@ body {
   top: 50%;
   left: 50%;
   font-size: 110px;
-  font-family: "Uniwars", sans-serif;
+  font-family: var(--font-anton), sans-serif;
+  text-transform: uppercase;
   letter-spacing: 18px;
   z-index: 5;
   text-align: center;
@@ -267,7 +269,9 @@ body {
 .hero {
   font-size: 80px;
   letter-spacing: 10px;
-  font-family: "Cinzel", serif;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .subtitle {
@@ -308,7 +312,9 @@ body {
   font-size: 56px;
   margin-top: 110px;
   letter-spacing: 6px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .projects-line {
@@ -364,7 +370,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Cinzel", serif;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 800;
   font-size: 22px;
 }
 
@@ -418,7 +425,9 @@ body {
   font-size: 56px;
   margin-top: 120px;
   letter-spacing: 5px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .about-line {
@@ -505,7 +514,8 @@ body {
   font-size: 16px;
   opacity: 0.7;
   line-height: 1.7;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 300;
 }
 
 /* ===== ABOUT STATS ===== */
@@ -527,9 +537,9 @@ body {
 }
 
 .stat-value {
-  font-family: 'Arial Black', Gadget, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 900;
   font-size: 24px;
-  font-weight: bold;
   color: white;
 }
 
