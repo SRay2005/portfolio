@@ -6,67 +6,161 @@ import { useRouter } from "next/navigation"
 
 export default function MarvelIntro() {
   const router = useRouter()
+  const containerRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
-  const textRef = useRef<HTMLHeadingElement>(null)
+  const textMaskRef = useRef<HTMLHeadingElement>(null)
+  const textSolidRef = useRef<HTMLHeadingElement>(null)
+  const flashRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const tiles = gridRef.current?.querySelectorAll("img")
     if (!tiles) return
 
-    // Lock initial states before first paint — prevents FOUC
-    gsap.set(gridRef.current, { scale: 1.5 })
-    gsap.set(textRef.current, {
-      opacity: 0,
-      scale: 1.8,
-      filter: "blur(12px)",
-      xPercent: -50,
-      yPercent: -50,
+    // Initial setup for 3D camera zoom and tilts
+    gsap.set(gridRef.current, {
+      scale: 1.4,
+      rotationX: 12,
+      rotationY: -10,
+      rotationZ: -5,
+      transformPerspective: 1000,
     })
 
-    const imageInterval = setInterval(() => {
+    gsap.set(textMaskRef.current, {
+      scale: 1.1,
+      opacity: 1,
+    })
+
+    gsap.set(textSolidRef.current, {
+      scale: 1.1,
+      opacity: 0,
+      filter: "blur(10px)",
+    })
+
+    // Variable page flip interval (decelerating flipbook effect)
+    let currentDelay = 35 // starts at hyper speed
+    let isRunning = true
+    let timeoutId: NodeJS.Timeout
+
+    const flipImages = () => {
+      if (!isRunning) return
+
       tiles.forEach((img) => {
-        const random = Math.floor(Math.random() * 11) + 1
-        img.setAttribute("src", `/marvel/${random}.jpg`)
+        // Randomly skip some tiles to simulate organic fanning pages
+        if (Math.random() > 0.4) {
+          const random = Math.floor(Math.random() * 11) + 1
+          img.setAttribute("src", `/marvel/${random}.jpg`)
+        }
       })
-    }, 150)
 
-    const tl = gsap.timeline()
+      // Random flash on a single tile
+      const randomTile = tiles[Math.floor(Math.random() * tiles.length)]
+      if (randomTile && Math.random() > 0.5) {
+        gsap.fromTo(
+          randomTile,
+          { filter: "brightness(2.5)" },
+          { filter: "brightness(1)", duration: 0.15 }
+        )
+      }
 
-    tl.fromTo(
-      gridRef.current,
-      { scale: 1.5 },
-      { scale: 1, duration: 5, ease: "power2.out" }
-    )
-      .fromTo(
-        textRef.current,
-        { opacity: 0, scale: 1.8, filter: "blur(12px)" },
-        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 3 },
-        "-=2"
-      )
-      .to({}, { duration: 2.5 })
-      .to([gridRef.current, textRef.current], { opacity: 0, duration: 1.5 })
-      .call(() => {
-        clearInterval(imageInterval)
+      // Decelerate the speed slowly
+      if (currentDelay < 250) {
+        currentDelay += 3.5
+      }
+
+      timeoutId = setTimeout(flipImages, currentDelay)
+    }
+
+    flipImages()
+
+    // Cinematic GSAP Timeline
+    const tl = gsap.timeline({
+      onComplete: () => {
+        isRunning = false
+        clearTimeout(timeoutId)
         router.push("/home")
-      })
+      }
+    })
+
+    tl.to(gridRef.current, {
+      scale: 1.05,
+      rotationX: 5,
+      rotationY: -3,
+      rotationZ: -1,
+      duration: 5.5,
+      ease: "power1.out",
+    })
+    // Sweeping page flash lines (screen flash)
+    .to(flashRef.current, {
+      opacity: 0.8,
+      duration: 0.08,
+      yoyo: true,
+      repeat: 1,
+      ease: "power2.inOut",
+    }, 1.2)
+    .to(flashRef.current, {
+      opacity: 0.5,
+      duration: 0.06,
+      yoyo: true,
+      repeat: 1,
+      ease: "power2.inOut",
+    }, 2.5)
+    // Slowly transition logo from mask cut-out (transparent letters) to solid golden-gradient
+    .to(textSolidRef.current, {
+      opacity: 1,
+      scale: 1.02,
+      filter: "blur(0px)",
+      duration: 2.2,
+      ease: "power2.inOut",
+    }, "-=2.8")
+    // Fade out mask text to allow solid text to completely take over
+    .to(textMaskRef.current, {
+      opacity: 0,
+      duration: 1.5,
+      ease: "power2.inOut",
+    }, "-=2.2")
+    // Cinematic logo flare / zoom in at the end
+    .to([textSolidRef.current, gridRef.current], {
+      scale: 1.2,
+      opacity: 0,
+      filter: "blur(15px)",
+      duration: 1.5,
+      ease: "power3.in",
+    }, "-=0.8")
 
     return () => {
-      clearInterval(imageInterval)
+      isRunning = false
+      clearTimeout(timeoutId)
       tl.kill()
     }
-  }, [])
+  }, [router])
 
   return (
-    <div className="intro">
+    <div className="intro" ref={containerRef}>
+      {/* 3D Comic Grid */}
       <div className="marvel-grid" ref={gridRef}>
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 24 }).map((_, i) => (
           <div key={i} className="tile">
-            <img src={`/marvel/${(i % 6) + 1}.jpg`} />
+            <img src={`/marvel/${(i % 11) + 1}.jpg`} alt="Comic page" />
           </div>
         ))}
       </div>
+
+      {/* Crimson-Red & Vignette Overlay */}
       <div className="intro-overlay"></div>
-      <h1 ref={textRef} className="marvel-text">
+      <div className="vignette"></div>
+
+      {/* Screen Page-Flash sweep */}
+      <div className="page-flash" ref={flashRef}></div>
+
+      {/* Mask overlay container - mix-blend-mode: multiply renders the white text transparent */}
+      <div className="marvel-mask">
+        <h1 ref={textMaskRef} className="marvel-mask-text">
+          SANNIDHYA RAY
+        </h1>
+      </div>
+
+      {/* Solid text that fades in at the end */}
+      <h1 ref={textSolidRef} className="marvel-solid-text">
         SANNIDHYA RAY
       </h1>
     </div>

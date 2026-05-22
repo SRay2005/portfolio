@@ -126,7 +126,6 @@ body {
 
 /* ===== INTRO ===== */
 
-/* Single definition — fixed, covers everything */
 .intro {
   position: fixed;
   top: 0;
@@ -136,57 +135,117 @@ body {
   background: black;
   z-index: 10000;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .marvel-grid {
   position: absolute;
-  width: 140%;
-  height: 140%;
-  top: -20%;
-  left: -20%;
+  width: 150%;
+  height: 150%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 10px;
-  transform: rotate(-10deg);
+  gap: 12px;
+  will-change: transform;
+}
+
+.tile {
+  overflow: hidden;
+  background: #111;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .tile img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  will-change: filter;
 }
 
+/* Classic Crimson-Red Tint with radial fading */
 .intro-overlay {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.65);
-  z-index: 3;
+  background: radial-gradient(circle at center, rgba(229, 9, 20, 0.45) 0%, rgba(180, 0, 0, 0.7) 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* No transform here — GSAP owns it via xPercent/yPercent */
-.marvel-text {
-  position: fixed;
-  top: 50%;
-  left: 50%;
+/* Heavy Cinematic Vignette */
+.vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Page fanning flash overlay */
+.page-flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  opacity: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Multiply-based text mask overlay */
+.marvel-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  mix-blend-mode: multiply;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.marvel-mask-text {
   font-size: 110px;
   font-family: var(--font-anton), sans-serif;
   text-transform: uppercase;
-  letter-spacing: 18px;
-  z-index: 5;
+  letter-spacing: 12px;
   text-align: center;
+  color: white; /* pure white text becomes transparent due to multiply blend mode */
   width: 100%;
-  background: linear-gradient(180deg, #ffffff, #f5d742, #d4af37, #ffffff);
+  will-change: transform, opacity;
+}
+
+/* Solid text that fades in over the mask at the end */
+.marvel-solid-text {
+  position: absolute;
+  font-size: 110px;
+  font-family: var(--font-anton), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 12px;
+  text-align: center;
+  z-index: 6;
+  width: 100%;
+  background: linear-gradient(180deg, #ffffff, #f5d742, #ff8c00, #ffffff);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-/* Single definition */
-.intro-fade {
+  pointer-events: none;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  will-change: transform, opacity, filter;
 }
 
 /* Must beat .intro at z-index 10000 */
@@ -806,9 +865,10 @@ body {
     font-size: 12px;
   }
 
-  .marvel-text {
+  .marvel-mask-text,
+  .marvel-solid-text {
     font-size: 42px;
-    letter-spacing: 6px;
+    letter-spacing: 4px;
   }
 
   .skip-btn {
