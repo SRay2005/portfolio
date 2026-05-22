@@ -151,6 +151,45 @@ body {
   will-change: transform;
 }
 
+/* Layer 1: Foreground grid (inside text) */
+.marvel-grid-fg {
+  z-index: 1;
+}
+
+/* Layer 2: Black mask containing the cutout text */
+.marvel-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  mix-blend-mode: multiply;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.marvel-mask-text {
+  font-size: 110px;
+  font-family: var(--font-anton), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 12px;
+  text-align: center;
+  color: white; /* transparent cutout on multiply */
+  width: 100%;
+  will-change: transform, opacity;
+}
+
+/* Layer 3: Background grid running on top of mask (subtle/dimmed) */
+.marvel-grid-bg {
+  z-index: 3;
+  opacity: 0.12; /* subtle ambient grid */
+  pointer-events: none;
+}
+
 .tile {
   overflow: hidden;
   background: #111;
@@ -165,7 +204,7 @@ body {
   will-change: filter;
 }
 
-/* Classic Crimson-Red Tint with radial fading */
+/* Layer 4: Classic Crimson-Red Tint overlay */
 .intro-overlay {
   position: absolute;
   top: 0;
@@ -173,11 +212,11 @@ body {
   width: 100%;
   height: 100%;
   background: radial-gradient(circle at center, rgba(229, 9, 20, 0.45) 0%, rgba(180, 0, 0, 0.7) 100%);
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
 }
 
-/* Heavy Cinematic Vignette */
+/* Layer 5: Heavy Vignette */
 .vignette {
   position: absolute;
   top: 0;
@@ -185,11 +224,11 @@ body {
   width: 100%;
   height: 100%;
   background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
-  z-index: 3;
+  z-index: 5;
   pointer-events: none;
 }
 
-/* Page fanning flash overlay */
+/* Layer 6: Page flash overlay */
 .page-flash {
   position: absolute;
   top: 0;
@@ -198,38 +237,11 @@ body {
   height: 100%;
   background: white;
   opacity: 0;
-  z-index: 4;
+  z-index: 6;
   pointer-events: none;
 }
 
-/* Multiply-based text mask overlay */
-.marvel-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  mix-blend-mode: multiply;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.marvel-mask-text {
-  font-size: 110px;
-  font-family: var(--font-anton), sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 12px;
-  text-align: center;
-  color: white; /* pure white text becomes transparent due to multiply blend mode */
-  width: 100%;
-  will-change: transform, opacity;
-}
-
-/* Solid text that fades in over the mask at the end */
+/* Layer 7: Solid text (resolving logo) */
 .marvel-solid-text {
   position: absolute;
   font-size: 110px;
@@ -237,7 +249,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 12px;
   text-align: center;
-  z-index: 6;
+  z-index: 7;
   width: 100%;
   background: linear-gradient(180deg, #ffffff, #f5d742, #ff8c00, #ffffff);
   background-clip: text;

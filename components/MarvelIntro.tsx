@@ -7,23 +7,32 @@ import { useRouter } from "next/navigation"
 export default function MarvelIntro() {
   const router = useRouter()
   const containerRef = useRef<HTMLDivElement>(null)
-  const gridRef = useRef<HTMLDivElement>(null)
+  
+  // Two grid refs: one for background (dimmed), one for foreground (inside text)
+  const gridBgRef = useRef<HTMLDivElement>(null)
+  const gridFgRef = useRef<HTMLDivElement>(null)
+  
   const textMaskRef = useRef<HTMLHeadingElement>(null)
   const textSolidRef = useRef<HTMLHeadingElement>(null)
   const flashRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const tiles = gridRef.current?.querySelectorAll("img")
-    if (!tiles) return
+    const tilesBg = gridBgRef.current?.querySelectorAll("img")
+    const tilesFg = gridFgRef.current?.querySelectorAll("img")
+    if (!tilesBg || !tilesFg) return
 
-    // Initial setup for 3D camera zoom and tilts
-    gsap.set(gridRef.current, {
-      scale: 1.4,
-      rotationX: 12,
-      rotationY: -10,
-      rotationZ: -5,
-      transformPerspective: 1000,
-    })
+    // Setup 3D transforms on both grids
+    const setupGrid3D = (el: HTMLDivElement) => {
+      gsap.set(el, {
+        scale: 1.4,
+        rotationX: 12,
+        rotationY: -10,
+        rotationZ: -5,
+        transformPerspective: 1000,
+      })
+    }
+    if (gridBgRef.current) setupGrid3D(gridBgRef.current)
+    if (gridFgRef.current) setupGrid3D(gridFgRef.current)
 
     gsap.set(textMaskRef.current, {
       scale: 1.1,
@@ -44,22 +53,31 @@ export default function MarvelIntro() {
     const flipImages = () => {
       if (!isRunning) return
 
-      tiles.forEach((img) => {
-        // Randomly skip some tiles to simulate organic fanning pages
-        if (Math.random() > 0.4) {
-          const random = Math.floor(Math.random() * 11) + 1
-          img.setAttribute("src", `/marvel/${random}.jpg`)
-        }
-      })
+      // Sync the random updates on both grids for visual consistency
+      const imageCount = 11
+      const count = Math.min(tilesBg.length, tilesFg.length)
 
-      // Random flash on a single tile
-      const randomTile = tiles[Math.floor(Math.random() * tiles.length)]
-      if (randomTile && Math.random() > 0.5) {
-        gsap.fromTo(
-          randomTile,
-          { filter: "brightness(2.5)" },
-          { filter: "brightness(1)", duration: 0.15 }
-        )
+      for (let i = 0; i < count; i++) {
+        if (Math.random() > 0.4) {
+          const randomIdx = Math.floor(Math.random() * imageCount) + 1
+          const srcPath = `/marvel/${randomIdx}.jpg`
+          tilesBg[i].setAttribute("src", srcPath)
+          tilesFg[i].setAttribute("src", srcPath)
+        }
+      }
+
+      // Random flash on a single tile (both background and mask)
+      const randomIdx = Math.floor(Math.random() * count)
+      if (Math.random() > 0.5) {
+        const bgTile = tilesBg[randomIdx]
+        const fgTile = tilesFg[randomIdx]
+        if (bgTile && fgTile) {
+          gsap.fromTo(
+            [bgTile, fgTile],
+            { filter: "brightness(2.5)" },
+            { filter: "brightness(1)", duration: 0.15 }
+          )
+        }
       }
 
       // Decelerate the speed slowly
@@ -81,7 +99,8 @@ export default function MarvelIntro() {
       }
     })
 
-    tl.to(gridRef.current, {
+    // Animate both grids simultaneously
+    tl.to([gridBgRef.current, gridFgRef.current], {
       scale: 1.05,
       rotationX: 5,
       rotationY: -3,
@@ -119,7 +138,7 @@ export default function MarvelIntro() {
       ease: "power2.inOut",
     }, "-=2.2")
     // Cinematic logo flare / zoom in at the end
-    .to([textSolidRef.current, gridRef.current], {
+    .to([textSolidRef.current, gridBgRef.current, gridFgRef.current], {
       scale: 1.2,
       opacity: 0,
       filter: "blur(15px)",
@@ -136,8 +155,24 @@ export default function MarvelIntro() {
 
   return (
     <div className="intro" ref={containerRef}>
-      {/* 3D Comic Grid */}
-      <div className="marvel-grid" ref={gridRef}>
+      {/* 1. Foreground Comic Grid (runs behind the mask, plays inside the letters) */}
+      <div className="marvel-grid marvel-grid-fg" ref={gridFgRef}>
+        {Array.from({ length: 24 }).map((_, i) => (
+          <div key={i} className="tile">
+            <img src={`/marvel/${(i % 11) + 1}.jpg`} alt="Comic page" />
+          </div>
+        ))}
+      </div>
+
+      {/* 2. Mask overlay container - mix-blend-mode: multiply renders the white text transparent */}
+      <div className="marvel-mask">
+        <h1 ref={textMaskRef} className="marvel-mask-text">
+          SANNIDHYA RAY
+        </h1>
+      </div>
+
+      {/* 3. Background Comic Grid (dimmed, runs on top of the black mask so the background is not completely plain) */}
+      <div className="marvel-grid marvel-grid-bg" ref={gridBgRef}>
         {Array.from({ length: 24 }).map((_, i) => (
           <div key={i} className="tile">
             <img src={`/marvel/${(i % 11) + 1}.jpg`} alt="Comic page" />
@@ -152,14 +187,7 @@ export default function MarvelIntro() {
       {/* Screen Page-Flash sweep */}
       <div className="page-flash" ref={flashRef}></div>
 
-      {/* Mask overlay container - mix-blend-mode: multiply renders the white text transparent */}
-      <div className="marvel-mask">
-        <h1 ref={textMaskRef} className="marvel-mask-text">
-          SANNIDHYA RAY
-        </h1>
-      </div>
-
-      {/* Solid text that fades in at the end */}
+      {/* Solid text that fades in over the mask at the end */}
       <h1 ref={textSolidRef} className="marvel-solid-text">
         SANNIDHYA RAY
       </h1>
