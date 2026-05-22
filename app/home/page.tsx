@@ -281,7 +281,6 @@ export default function Home() {
             texts={[
               "Electronics Engineer",
               "Physics Researcher",
-              "Machine Learning Developer",
             ]}
           />
           <div className="home-cta-row">
