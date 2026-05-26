@@ -279,8 +279,10 @@ export default function Home() {
           <MagneticText text="SANNIDHYA RAY" />
           <ScrambleText
             texts={[
-              "Electronics Engineer",
-              "Physics Researcher",
+              "Build",
+              "Deploy",
+              "Scale",
+              "Innovate"
             ]}
           />
           <div className="home-cta-row">
