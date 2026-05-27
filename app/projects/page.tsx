@@ -156,6 +156,8 @@ const projects = [
 
 /* ─── Projects Page ────────────────────────────────────────────── */
 
+import SpotlightCard from "@/components/SpotlightCard"
+
 export default function Projects() {
   return (
     <PageWrapper>
@@ -176,7 +178,7 @@ export default function Projects() {
 
           <div className="apps-container">
             {projects.map((p, i) => (
-              <div key={i} className={`app-card anim-${Math.min(i + 3, 6)}`}>
+              <SpotlightCard key={i} className={`app-card anim-${Math.min(i + 3, 6)}`}>
                 <div className="app-left">
                   <div className="app-icon">{p.name[0]}</div>
 
@@ -201,7 +203,7 @@ export default function Projects() {
                     </div>
                   )}
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </div>

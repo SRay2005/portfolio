@@ -154,6 +154,8 @@ const stats = [
 
 /* ─── About Page ───────────────────────────────────────────────── */
 
+import SpotlightCard from "@/components/SpotlightCard"
+
 export default function About() {
   return (
     <PageWrapper>
@@ -180,7 +182,7 @@ export default function About() {
             <img src="/profile.jpg" className="about-image" />
 
             <div className="about-bio">
-              <h2>Who Am I?</h2>
+               <h2>Who Am I?</h2>
               <p>
                 I&apos;m a dual-degree undergraduate at BITS Pilani with interests in
                 machine learning, space systems, and engineering design.
@@ -200,10 +202,10 @@ export default function About() {
           {/* Highlights */}
           <div className="about-highlights anim-4">
             {highlights.map((h, i) => (
-              <div key={i} className="about-highlight-item">
+              <SpotlightCard key={i} className="about-highlight-item">
                 <h3>{h.title}</h3>
                 <p>{h.desc}</p>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
 
