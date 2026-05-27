@@ -4,6 +4,20 @@ import Navbar from "@/components/Navbar"
 import PageWrapper from "@/components/PageWrapper"
 import { useState, useRef, useEffect } from "react"
 
+const TerminalEmail = () => {
+  const [copied, setCopied] = useState(false)
+  const handleClick = (e: React.MouseEvent) => {
+    navigator.clipboard.writeText("sannidhya.ray2005@gmail.com")
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+  return (
+    <a href="mailto:sannidhya.ray2005@gmail.com" onClick={handleClick}>
+      {copied ? "sannidhya.ray2005@gmail.com (Copied!)" : "sannidhya.ray2005@gmail.com"}
+    </a>
+  )
+}
+
 export default function Contact() {
   const defaultHistory = [
     "Type commands and press Enter. Try 'help' to see a list of commands.",
@@ -17,7 +31,7 @@ export default function Contact() {
 
   const commands: any = {
     help: "Commands: email, github, linkedin, cv, clear",
-    email: <a href="mailto:sannidhya.ray2005@gmail.com">sannidhya.ray2005@gmail.com</a>,
+    email: <TerminalEmail />,
     github: <a href="https://github.com/SRay2005" target="_blank">github.com/SRay2005</a>,
     linkedin: <a href="https://linkedin.com/in/sannidhya-ray" target="_blank">linkedin.com/in/sannidhya-ray</a>,
     cv: <a href="/resume.pdf" target="_blank">Open CV here</a>,
@@ -36,6 +50,14 @@ export default function Contact() {
     inputRef.current?.focus()
     terminalRef.current?.scrollTo(0, terminalRef.current.scrollHeight)
   }, [history])
+
+  const [copied, setCopied] = useState(false)
+
+  const handleEmailClick = () => {
+    navigator.clipboard.writeText("sannidhya.ray2005@gmail.com")
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <PageWrapper>
@@ -69,8 +91,12 @@ export default function Contact() {
 
           {/* Direct links for people who don't want the terminal */}
           <div className="contact-links">
-            <a href="mailto:sannidhya.ray2005@gmail.com" className="contact-link">
-              Email
+            <a 
+              href="mailto:sannidhya.ray2005@gmail.com" 
+              className="contact-link"
+              onClick={handleEmailClick}
+            >
+              {copied ? "Copied!" : "Email"}
             </a>
             <a href="https://github.com/SRay2005" target="_blank" className="contact-link">
               GitHub
