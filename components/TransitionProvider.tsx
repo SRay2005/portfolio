@@ -1,7 +1,7 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { createContext, useContext, useState } from "react"
+import { useRouter, usePathname } from "next/navigation"
+import { createContext, useContext, useState, useEffect } from "react"
 import PortalTransition from "./PortalTransition"
 
 const TransitionContext = createContext<any>(null)
