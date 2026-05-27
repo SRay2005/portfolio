@@ -82,9 +82,7 @@ export default function SpotlightCard({
           transition: 'opacity 0.4s ease',
         }}
       />
-      <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%' }}>
-        {children}
-      </div>
+      {children}
     </motion.div>
   );
 }
